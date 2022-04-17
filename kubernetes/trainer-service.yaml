@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-service-http
+  name: trainer-service-http
 spec:
   selector:
     matchLabels:
-      app: users-service-http
+      app: trainer-service-http
   template:
     metadata:
       labels:
-        app: users-service-http
+        app: trainer-service-http
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
@@ -23,7 +23,7 @@ spec:
             while ! nc -z mysql-service 3306; do sleep 5; printf "-"; done; echo -e "  >> MySQL DB Server has started";'
       containers:
         - name: server
-          image: users-service
+          image: trainer-service
           ports:
             - containerPort: 3000
           env:
@@ -36,29 +36,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-service-http
+  name: trainer-service-http
 spec:
   type: NodePort
   selector:
-    app: users-service-http
+    app: trainer-service-http
   ports:
     - name: http
       port: 3000
       targetPort: 3000
-      nodePort: 30102
+      nodePort: 30100
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-service-grpc
+  name: trainer-service-grpc
 spec:
   selector:
     matchLabels:
-      app: users-service-grpc
+      app: trainer-service-grpc
   template:
     metadata:
       labels:
-        app: users-service-grpc
+        app: trainer-service-grpc
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
@@ -72,7 +72,7 @@ spec:
             while ! nc -z mysql-service 3306; do sleep 5; printf "-"; done; echo -e "  >> MySQL DB Server has started";'
       containers:
         - name: server
-          image: users-service
+          image: trainer-service
           ports:
             - containerPort: 3000
           env:
@@ -85,11 +85,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-service-grpc
+  name: trainer-service-grpc
 spec:
   type: ClusterIP
   selector:
-    app: users-service-grpc
+    app: trainer-service-grpc
   ports:
     - name: grpc
       port: 3000

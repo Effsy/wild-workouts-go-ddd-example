@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firestore-service
+spec:
+  selector:
+    matchLabels:
+      app: firestore-service
+  template:
+    metadata:
+      labels:
+        app: firestore-service
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: firestore
+          image: karhoo/firestore-emulator:0.3.2
+          ports:
+            - containerPort: 8787
+            - containerPort: 4000
+          envFrom:
+          - configMapRef:
+              name: server-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: firestore-service
+spec:
+  type: NodePort
+  selector:
+    app: firestore-service
+  ports:
+    - name: firestore
+      port: 8787
+      targetPort: 8787
+    - name: firestore-ui
+      port: 4000
+      targetPort: 4000
+      nodePort: 30400

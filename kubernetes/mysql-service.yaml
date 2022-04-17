@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    matchLabels:
+      app: mysql-service
+  template:
+    metadata:
+      labels:
+        app: mysql-service
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: server
+          image: mysql
+          volumeMounts:
+            - name: init-schema
+              mountPath: /docker-entrypoint-initdb.d/
+          ports:
+            - containerPort: 3306
+          envFrom:
+          - configMapRef:
+              name: server-env
+      volumes:
+        - name: init-schema
+          hostPath:
+            path: /sql/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql-service
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306

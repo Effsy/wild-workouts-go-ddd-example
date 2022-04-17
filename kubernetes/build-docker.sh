@@ -1,6 +1,14 @@
 #!/bin/bash
-readonly service="$1"
-readonly project_id="$2"
 
-docker build -t "gcr.io/$project_id/$service" "./internal" -f "./docker/app-prod/Dockerfile" --build-arg "SERVICE=$service"
-docker push "gcr.io/$project_id/$service"
+#docker build -t "localhost:5005/users-service:1.0" "./internal/users" -f "./docker/app/Dockerfile"
+#docker build -t "localhost:5005/trainer-service:1.0" "./internal/trainer" -f "./docker/app/Dockerfile"
+#docker build -t "localhost:5005/trainings-service:1.0" "./internal/trainings" -f "./docker/app/Dockerfile"
+
+docker build -t "localhost:5005/users-service:1.0" "./docker/app" --build-arg "SERVICE=users"
+docker build -t "localhost:5005/trainer-service:1.0" "./docker/app" --build-arg "SERVICE=trainer"
+docker build -t "localhost:5005/trainings-service:1.0" "./docker/app" --build-arg "SERVICE=trainings"
+
+
+docker push localhost:5005/users-service:1.0
+docker push localhost:5005/trainer-service:1.0
+docker push localhost:5005/trainings-service:1.0

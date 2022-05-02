@@ -8,6 +8,8 @@ spec:
       app: trainer-service-http
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: trainer-service-http
     spec:
@@ -57,6 +59,8 @@ spec:
       app: trainer-service-grpc
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: trainer-service-grpc
     spec:

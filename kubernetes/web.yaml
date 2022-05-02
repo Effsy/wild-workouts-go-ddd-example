@@ -8,6 +8,8 @@ spec:
       app: web
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: web
     spec:

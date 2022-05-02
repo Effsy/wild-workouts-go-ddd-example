@@ -12,6 +12,8 @@ Install ctlptl
 
 [ctlptl installation](https://github.com/tilt-dev/ctlptl)
 
+https://linkerd.io/2.10/getting-started/
+
 ## Local development
 
 
@@ -51,6 +53,11 @@ kind delete cluster
 ```
 
 
+
+Start linkerd dashboard:
+```
+linkerd viz dashboard
+```
 
 No longer required:
 ```

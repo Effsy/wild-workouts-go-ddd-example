@@ -8,6 +8,8 @@ spec:
       app: trainings-service-http
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: trainings-service-http
     spec:

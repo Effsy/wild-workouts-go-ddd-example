@@ -10,5 +10,7 @@ k8s_yaml('kubernetes/users-service.yaml')
 k8s_yaml('kubernetes/trainer-service.yaml')
 k8s_yaml('kubernetes/trainings-service.yaml')
 k8s_yaml('kubernetes/web.yaml')
+k8s_yaml('kubernetes/linkerd.yaml')
+k8s_yaml('kubernetes/linkerd-viz.yaml')
 
 # k8s_resource('example-go', port_forwards=8000)

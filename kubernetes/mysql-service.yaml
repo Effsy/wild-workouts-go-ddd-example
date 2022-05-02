@@ -8,6 +8,8 @@ spec:
       app: mysql-service
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: mysql-service
     spec:

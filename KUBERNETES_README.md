@@ -3,74 +3,26 @@
 
 ## Pre-requisites
 
+Install kind https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
 
-Install tilt
+Install tilt https://docs.tilt.dev/install.html
 
-https://docs.tilt.dev/install.html
-
-Install ctlptl
-
-[ctlptl installation](https://github.com/tilt-dev/ctlptl)
-
-https://linkerd.io/2.10/getting-started/
+Install linkerd https://linkerd.io/2.10/getting-started/
 
 ## Local development
 
-
-Start a local k8s cluster using kind with a local registry. This uses ctlptl instead of kind
-
-kubectl port-forward deployment/web 3000:30100
-
-
-
-
-
-
+Start a local k8s cluster using kind with a local registry
 ```
 ./scripts/kind-local-registry.sh
 ```
 
-
-
-```
-ctlptl create registry ctlptl-registry --port=5005
-ctlptl create cluster kind --registry=ctlptl-registry
-```
-
-
 Start tilt
-
 ```
 tilt up
-
-
 ```
 
-
-Remove cluster
-```
-kind delete cluster
-```
-
-
-
-Start linkerd dashboard:
+Start linkerd dashboard
 ```
 linkerd viz dashboard
 ```
-
-No longer required:
-```
-./kubernetes/build-docker.sh
-
-```
-
-## Alternative Local Development Setup
-
-[Kind installation](https://kind.sigs.k8s.io/docs/user/quick-start#installation)
-
-```
-kind create cluster
-```
-
 

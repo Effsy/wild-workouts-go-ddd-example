@@ -1,5 +1,6 @@
 # Kubernetes Setup
 
+K8s manifests can be found in [kubernetes](https://github.com/Effsy/wild-workouts-go-ddd-example/tree/feature/k8s/kubernetes).
 
 ## Pre-requisites
 
